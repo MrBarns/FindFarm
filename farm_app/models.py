@@ -26,8 +26,8 @@ class Town(models.Model):
 class Farm(models.Model):
     name = models.CharField(max_length = 200, unique = True)
     owner = models.ForeignKey(User, on_delete = models.CASCADE)
-    produce = models.TextField()
-    address = models.TextField()
+    produce = models.CharField(max_length = 500)
+    address = models.CharField(max_length = 500)
     town = models.ForeignKey(Town, on_delete=models.CASCADE)
 
     

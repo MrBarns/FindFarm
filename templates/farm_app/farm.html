@@ -2,16 +2,24 @@
 
 {% block content %}
 
-<div class = "container" style="padding: 10px">
+{% include 'farm_app/mainbar.html' %}
+
+<div style="padding: 10px">
     <div>
         <h1>{{farm.name}}</h1>
     </div>
+    {% if request.user == farm.owner %}
+    
+    <button class="btn">
+    <a href="{% url 'update_farm' farm.id %}">Update</a>
+    </button>
+    <button class="btn">
+    <a href="{% url 'delete_farm' farm.id %}">delete</a>
+    </button>
+    {% endif %}
 
+    <button class="btn">
+    <a href="{% url 'home' %}" style="padding: 10px">Back</a>
+    </button>
 </div>
-
-{% if request.user == farm.owner %}
-<a href="{% url 'update_farm' farm.id %}">Update</a>
-<a href="{% url 'delete_farm' farm.id %}">delete</a>
-{% endif %}
-<a href="{% url 'home' %}" style="padding: 10px">Back</a>
 {% endblock content %}

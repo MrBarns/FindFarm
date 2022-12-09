@@ -1,0 +1,29 @@
+<!-- Top Bar -->
+<nav class="navbar bg-dark bg-gradient text-white" style="padding: 10px">
+    <div>
+        <button class="btn">
+        <a href="{% url 'home' %}">Home</a>
+        </button>
+
+        <!-- User logged in -->
+        {% if request.user.is_authenticated %}
+        
+        <!-- User is farmer -->
+        {% if request.user.is_farmer %}
+        <button class="btn">
+        <a href="{% url 'create_farm' %}">Add a farm</a>
+        </button>
+
+        {% endif %}
+        <button class="btn">
+        <a href="{% url 'logout' %}">Logout</a>
+        </button>
+
+        {% else %}
+        <button class="btn">
+        <a href="{% url 'login' %}">Login/Register</a>
+        </button>
+        {% endif %}
+        
+    </div>
+    </nav>

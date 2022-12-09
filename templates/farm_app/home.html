@@ -2,6 +2,8 @@
 
 {% block content %}
 
+{% include 'farm_app/mainbar.html' %}
+<div style="padding: 10px">
 <div>
     
     <h2>
@@ -9,20 +11,7 @@
     </h2>
     
 </div>
-<!-- <div class = "col"> -->
-    <!-- {% if towns %} -->
-    <!-- {% for town in towns %} -->
-    <!-- <div> -->
-        <!-- {{ town.name }} -->
-    <!-- </div> -->
-    <!-- {% endfor %} -->
-    <!-- {% else %} -->
-    <!-- <p> -->
-        <!-- No towns to display -->
-    <!-- </p> -->
-    <!-- {% endif %} -->
-<!-- </div> -->
-<div class = "col">
+<div>
     {% if farms %}
     {% for farm in farms %}
     <div>
@@ -35,6 +24,8 @@
     </p>
 
     {% endif %}
+</div>
+    
 </div>
 
 {% endblock content %}
