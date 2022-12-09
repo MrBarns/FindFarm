@@ -1,0 +1,24 @@
+{% extends 'farm_app/base.html' %}
+
+{% block content %}
+<div style="padding: 10px">
+<h2 class="h2 mb-3 fw-normal">
+    Password Reset
+</h2>
+</div>
+<div class="row bg-dark bg-gradient text-white" style="padding: 25px">
+    
+<p>
+    Forgotten your password? Enter your email address below, 
+    and we’ll email instructions for setting a new one.
+</p>
+<form method = "POST" action="">
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <input class="w-10 btn btn-lg btn-primary" type="submit" value="Send instructions">
+</form>
+</div>
+
+{% endblock content %}

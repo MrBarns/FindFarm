@@ -1,0 +1,25 @@
+{% extends 'farm_app/base.html' %}
+
+{% block content %}
+<div>
+    <p>
+        Please login if you already have an account.
+    </p>
+</div>
+    <form method = 'POST' action="">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <input type = "submit" value = "Login">
+    </form>
+<div>
+    <p>
+    Forgotten your password?
+        <a href="{% url 'password_reset' %}">Reset</a>
+        <br>
+    Don't have an account yet?
+    <a href="{% url 'register_user' %}">Register</a>
+    </p>
+</div>
+
+{% endblock content %}

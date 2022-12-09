@@ -1,0 +1,18 @@
+{% extends 'farm_app/base.html' %}
+
+{% block content %}
+
+<div style="padding: 25px">
+    <h2>
+        Farm Details Form
+    </h2>
+    <form method="POST" action="">
+        {% csrf_token %}
+
+        {{ form.as_p }}
+        <input type = "submit" value = "Add Farm">
+    </form>
+    
+</div>
+
+{% endblock content %}

@@ -1,0 +1,17 @@
+{% extends 'farm_app/base.html' %}
+
+{% block content %}
+
+<div class = "container" style="padding: 10px">
+    <div>
+        <h1>{{farm.name}}</h1>
+    </div>
+
+</div>
+
+{% if request.user == farm.owner %}
+<a href="{% url 'update_farm' farm.id %}">Update</a>
+<a href="{% url 'delete_farm' farm.id %}">delete</a>
+{% endif %}
+<a href="{% url 'home' %}" style="padding: 10px">Back</a>
+{% endblock content %}

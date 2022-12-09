@@ -1,0 +1,16 @@
+{% extends 'farm_app/base.html' %}
+
+{% block content %}
+    <div>
+        <p>
+            Are you sure you want to delete {{farm.name}}?
+        </p>
+        
+        <form method = "POST" action="">
+            {% csrf_token %}
+        <input type="submit" value="Confirm">
+        <a href="{% url 'farm' farm.id %}">Cancel</a>
+        </form>
+    </div>
+
+{% endblock content %}
