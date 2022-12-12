@@ -30,4 +30,7 @@ class Farm(models.Model):
     address = models.CharField(max_length = 500)
     town = models.ForeignKey(Town, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.name
+
     

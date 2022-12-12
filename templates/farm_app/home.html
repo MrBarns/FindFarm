@@ -15,7 +15,10 @@
     {% if farms %}
     {% for farm in farms %}
     <div>
-        <a href="{% url 'farm' farm.id %}">{{ farm.name }}</a>
+        <a href="{% url 'farm' farm.id %}">
+            <h4>{{ farm.name }}</h4>
+        </a>
+        {{ farm.town }}
     </div>
     {% endfor %}
     {% else %}

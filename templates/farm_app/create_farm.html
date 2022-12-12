@@ -12,7 +12,10 @@
         {% csrf_token %}
 
         {{ form.as_p }}
-        <input type = "submit" value = "Add Farm">
+        <input class="btn-default" type = "submit" value = "Confirm">
+        <button class="btn-default">
+        <a href="{{ request.META.HTTP_REFERER }}">Cancel</a>
+        </button>
     </form>
     
 </div>

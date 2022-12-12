@@ -7,6 +7,16 @@
 <div style="padding: 10px">
     <div>
         <h1>{{farm.name}}</h1>
+
+        <p>
+            <strong>Location: </strong> {{ farm.town }}
+        </p>
+        <p>
+            <strong>Produces: </strong> {{ farm.produce }}
+        </p>
+        <p>
+            <strong>Address: </strong> {{ farm.address }}
+        </p>
     </div>
     {% if request.user == farm.owner %}
     
