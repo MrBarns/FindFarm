@@ -8,14 +8,13 @@ from .models import *
 from .forms import *
 from .decorators import *
 
-@unauthenticated
-def RegisterView(request):
-    form = RegistrationForm()
 
+@unauthenticated
+def registerView(request):
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
         if form.is_valid():
-            user = form.save(commit = False)
+            user = form.save(commit=False)
             user.email = user.email.lower()
             user.save()
 
@@ -26,13 +25,15 @@ def RegisterView(request):
             messages.error(request, "Error occured during registration.\n \
             Please try again.")
 
+    else:
+        form = RegistrationForm()
+
     context = {'form' : form}
     return render(request, 'farm_app/register_user.html', context)
 
-@unauthenticated
-def LoginView(request):
-    form = LoginForm()
 
+@unauthenticated
+def loginView(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
         if form.is_valid():
@@ -40,31 +41,34 @@ def LoginView(request):
             password = request.POST.get('password')
 
             try:
-                user = User.objects.get(email = email)
+                user = User.objects.get(email=email)
             except:
                 messages.error(request, "User does not exist")
                 return redirect('login')
 
-            user = authenticate(request, email = email, password = password)
+            user = authenticate(request, email=email, password=password)
 
             if user:
                 login(request, user)
                 messages.success(request, "Login Successful")
                 return redirect('home')
 
+    else:
+        form = LoginForm()
+
     context = {'form': form}
     return render(request, 'farm_app/login.html', context)
+
 
 @login_required
 def logoutView(request):
     logout(request)
     return redirect('login')
 
+
 @login_required
 @farmer_required
 def createFarm(request):
-    form = FarmForm(initial={'owner': request.user})
-
     if request.method == 'POST':
         form = FarmForm(request.POST)
         if form.is_valid():
@@ -75,18 +79,19 @@ def createFarm(request):
             messages.error(request, "Some error occured. Pls try again")
             return redirect('add_farm')
 
+    else:
+        form = FarmForm(initial={'owner': request.user})
+
     context = {'form': form}
     return render(request, 'farm_app/create_farm.html', context)
+
 
 @login_required
 @farmer_required
 def updateFarm(request, pk):
-    farm = Farm.objects.get(id = pk)
-    form = FarmForm(instance = farm)
-
     if request.method == 'POST':
         town_id = request.POST.get('town')
-        town = Town.objects.get(id = town_id)
+        town = Town.objects.get(id=town_id)
 
         farm.name = request.POST.get('name')
         farm.address = request.POST.get('address')
@@ -95,36 +100,41 @@ def updateFarm(request, pk):
         farm.save()
         return redirect('farm', pk)
 
+    else:
+        farm = Farm.objects.get(id=pk)
+        form = FarmForm(instance=farm)
+
     context = {'form': form}
     return render(request, 'farm_app/create_farm.html', context)
 
-login_required
+
+@login_required
 @farmer_required
 def deleteFarm(request, pk):
-    farm = Farm.objects.get(id = pk)
-    name = farm.name
-
     if request.method == 'POST':
         farm.delete()
         messages.success(request, f"{name} deleted successfully")
         return redirect('home')
+
+    else:
+        farm = Farm.objects.get(id=pk)
+        name = farm.name
 
     context = {'farm': farm}
     return render(request, 'farm_app/delete_farm.html', context)
 
 @login_required
 def farm(request, pk):
-    farm = Farm.objects.get(id = pk)
+    farm = Farm.objects.get(id=pk)
 
-
-    context = {'farm':farm}
+    context = {'farm': farm}
     return render(request, 'farm_app/farm.html', context)
+
 
 @login_required
 def homeView(request):
     farms = Farm.objects.all()
     towns = Town.objects.all()
-
 
     context = {
         'farms': farms,
@@ -134,4 +144,3 @@ def homeView(request):
     return render(request, 'farm_app/home.html', context)
 
 
-# @login_required
