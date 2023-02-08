@@ -19,7 +19,7 @@ class RegistrationForm(UserCreationForm):
 
 class LoginForm(forms.Form):
     email = forms.EmailField()
-    password = forms.CharField(max_length = 128, widget = PasswordInput)
+    password = forms.CharField(max_length=128, widget=PasswordInput)
 
 class FarmForm(ModelForm):
     class Meta:
